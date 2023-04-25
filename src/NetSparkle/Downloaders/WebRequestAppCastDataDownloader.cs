@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -112,15 +113,25 @@ namespace NetSparkleUpdater.Downloaders
         /// <returns>The client used for file downloads</returns>
         protected virtual HttpClient CreateHttpClient(HttpClientHandler handler)
         {
+            HttpClient client = null;
+
             if (handler != null)
             {
-                return new HttpClient(handler);
+                client = new HttpClient(handler);
             }
             else
             {
-                return new HttpClient();
+                client = new HttpClient();
             }
-        }
+
+            // panda: disables caching
+            client.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue
+            {
+                NoCache = true
+            };
+
+            return client;
+		}
 
         /// <inheritdoc/>
         public Encoding GetAppCastEncoding()

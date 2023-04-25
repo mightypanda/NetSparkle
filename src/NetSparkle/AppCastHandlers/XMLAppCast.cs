@@ -91,7 +91,13 @@ namespace NetSparkleUpdater.AppCastHandlers
             try
             {
                 _logWriter.PrintMessage("Downloading app cast data...");
-                var appcast = _dataDownloader.DownloadAndGetAppCastData(_castUrl);
+
+				//panda: appended time to avoid caching?
+				DateTimeOffset now = DateTimeOffset.UtcNow;
+				DateTimeOffset epochStart = new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero);
+				long epochTime = (long)(now - epochStart).TotalSeconds;
+
+				var appcast = _dataDownloader.DownloadAndGetAppCastData(_castUrl + $"?time={epochTime}");
                 var signatureNeeded = Utilities.IsSignatureNeeded(_signatureVerifier.SecurityMode, _signatureVerifier.HasValidKeyInformation(), false);
                 bool isValidAppcast = true;
                 if (signatureNeeded)

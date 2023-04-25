@@ -6,7 +6,7 @@
                  xmlns:html="clr-namespace:TheArtOfDev.HtmlRenderer.Avalonia;assembly=Avalonia.HtmlRenderer"
                  mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
                  x:Class="NetSparkleUpdater.UI.Avalonia.UpdateAvailableWindow"
-                 Title="Software Update"
+                 Title="S-ARGAME Editor Update"
                  MinWidth="500"
                  MinHeight="225"
                  Width="700"
@@ -48,7 +48,7 @@
         Grid.Row="2"
         HorizontalScrollBarVisibility="Disabled"
         x:Name="ChangeNotesScrollViewer"
-        Margin="0,4,0,0">
+        Margin="15">
       <html:HtmlLabel Name="ChangeNotesHTMLLabel"
                       Background="White"
                       AutoSizeHeightOnly="True" />
