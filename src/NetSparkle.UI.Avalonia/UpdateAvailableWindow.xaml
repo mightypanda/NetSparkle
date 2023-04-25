@@ -12,7 +12,7 @@
                  Width="700"
                  Height="600"
                  WindowStartupLocation="CenterScreen">
-  <Grid ColumnDefinitions="Auto, *" Name="MainGrid"
+    <Grid ColumnDefinitions="Auto, *" Name="MainGrid" Background="black"
         RowDefinitions="Auto, Auto, *, Auto">
     <Image Grid.Row="0"
            Grid.RowSpan="3"
@@ -22,21 +22,21 @@
            HorizontalAlignment="Left"
            Width="48"
            Height="48"
-           Margin="10,10,0,0" />
+           Margin="10,10,0,0"  />
     <TextBlock Name="TitleHeader"
                Text="{Binding TitleHeaderText}"
                TextWrapping="Wrap"
                FontSize="16"
                Margin="10,10,10,0"
                Grid.Column="1"
-               Grid.Row="0" />
+               Grid.Row="0" Foreground="White" />
     <TextBlock Name="InfoText"
                Text="{Binding InfoText}"
                FontSize="14"
                TextWrapping="Wrap"
                Margin="10,5,5,0"
                Grid.Column="1"
-               Grid.Row="1" />
+               Grid.Row="1" Foreground="White" />
     <!--<WebBrowser Name="ReleaseNotesBrowser"
                 IsVisible="{Binding AreReleaseNotesVisible}"
                 AllowDrop="False"

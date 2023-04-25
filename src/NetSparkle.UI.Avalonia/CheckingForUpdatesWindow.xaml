@@ -10,7 +10,7 @@
         MaxWidth="400"
         MaxHeight="175"
         WindowStartupLocation="CenterScreen">
-  <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto">
+  <Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, Auto" Background="black">
     <Image Grid.Row="0" Grid.RowSpan="2"
            x:Name="AppIcon"
            VerticalAlignment="Top"
@@ -23,7 +23,7 @@
            Text="Checking for Updates..." 
            HorizontalAlignment="Center" 
            FontWeight="Bold" 
-           FontSize="24"/>
+           FontSize="24" Foreground="White"/>
     <ProgressBar Grid.Row="1" 
                  Grid.Column="0" 
                  IsIndeterminate="True"
