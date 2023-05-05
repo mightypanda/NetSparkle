@@ -44,6 +44,10 @@ namespace NetSparkleUpdater.Configurations
         public RegistryConfiguration(IAssemblyAccessor assemblyAccessor, string registryPath)
             : base(assemblyAccessor)
         {
+            // PANDA
+            if (assemblyAccessor == null)
+                return;
+
             _registryPath = registryPath;
             try
             {

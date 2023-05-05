@@ -238,6 +238,8 @@ namespace NetSparkleUpdater
         /// </summary>
         private ICheckingForUpdates CheckingForUpdatesWindow { get; set; }
 
+        public bool IgnoreCurrentAssemblyConfiguration { get; set; } = false;
+
         /// <summary>
         /// The configuration object for a given assembly that has information on when
         /// updates were checked last, any updates that have been skipped, etc.
@@ -248,20 +250,31 @@ namespace NetSparkleUpdater
             {
                 if (_configuration == null)
                 {
-#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7)
-                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    // PANDA: added IgnoreCurrentAssemblyConfiguration
+                    if (IgnoreCurrentAssemblyConfiguration)
                     {
-                        _configuration = new RegistryConfiguration(new AssemblyReflectionAccessor(_appReferenceAssembly));
+                        // PANDA: it was an abstract class
+                        _configuration = new Configuration(null);
                     }
                     else
                     {
-                        _configuration = new JSONConfiguration(new AssemblyReflectionAccessor(_appReferenceAssembly));
-                    }
+
+#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7)
+                        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                        {
+                            _configuration = new RegistryConfiguration(new AssemblyReflectionAccessor(_appReferenceAssembly));
+                        }
+                        else
+                        {
+                            _configuration = new JSONConfiguration(new AssemblyReflectionAccessor(_appReferenceAssembly));
+                        }
 #else
                     _configuration = new RegistryConfiguration(new AssemblyReflectionAccessor(_appReferenceAssembly));
 #endif
+                    }
                 }
-                return _configuration;
+
+				return _configuration;
             }
             set { _configuration = value; }
         }
