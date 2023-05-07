@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "NetSparkle.Tools.AppCastGenerator": {
+      "commandName": "Project",
+      "commandLineArgs": "-a \"D:\\OneDrive\\_DEPLOY\\s-argame\\win_x64\\packages\\starterpack\" -e exe -b \"D:\\OneDrive\\_DEPLOY\\s-argame\\win_x64\\packages\\starterpack\" -n \"S-ARGAME Starter Pack\" -u \"https://sargame-cdn.tabulatouch.com/win_x64/packages/starterpack\" -p \"D:\\OneDrive\\_DEPLOY\\s-argame\\win_x64\\packages\\starterpack\\changelogs\" -l \"https://sargame-cdn.tabulatouch.com/win_x64/packages\\starterpack/changelogs\" --overwrite-old-items --human-readable "
+    }
+  }
+}
