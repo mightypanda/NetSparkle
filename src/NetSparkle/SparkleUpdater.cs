@@ -1666,6 +1666,8 @@ namespace NetSparkleUpdater
         /// </summary>
         public async Task<UpdateInfo> CheckForUpdatesAtUserRequest(bool ignoreSkippedVersions = false)
         {
+            // PANDA: suppressed
+            /*
             if (CheckingForUpdatesWindow == null)
             {
                 CheckingForUpdatesWindow = UIFactory?.ShowCheckingForUpdates(this);
@@ -1675,9 +1677,10 @@ namespace NetSparkleUpdater
                 }
             }
             CheckingForUpdatesWindow?.Show();
+            */
             // artificial delay -- if internet is super fast and the update check is super fast, the flash (fast show/hide) of the
             // 'Checking for Updates...' window is very disorienting, so we add an artificial delay
-            await Task.Delay(250);
+            //await Task.Delay(250);
             UpdateInfo updateData = await CheckForUpdates(true, ignoreSkippedVersions); // handles UpdateStatus.UpdateAvailable (in terms of UI)
             if (CheckingForUpdatesWindow != null) // if null, user closed 'Checking for Updates...' window or the UIFactory was null
             {
@@ -1690,7 +1693,7 @@ namespace NetSparkleUpdater
                             UIFactory?.ShowVersionIsUpToDate(this);
                             break;
                         case UpdateStatus.UserSkipped:
-                            UIFactory?.ShowVersionIsSkippedByUserRequest(this); // they can get skipped version from Configuration
+							UIFactory?.ShowVersionIsSkippedByUserRequest(this); // they can get skipped version from Configuration
                             break;
                         case UpdateStatus.CouldNotDetermine:
                             UIFactory?.ShowCannotDownloadAppcast(this, AppCastUrl);
