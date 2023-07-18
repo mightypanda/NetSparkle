@@ -1681,7 +1681,10 @@ namespace NetSparkleUpdater
             // artificial delay -- if internet is super fast and the update check is super fast, the flash (fast show/hide) of the
             // 'Checking for Updates...' window is very disorienting, so we add an artificial delay
             //await Task.Delay(250);
-            UpdateInfo updateData = await CheckForUpdates(true, ignoreSkippedVersions); // handles UpdateStatus.UpdateAvailable (in terms of UI)
+
+            // NOTE: 18/07/2023 for some reason the first parameter was true, wrong! fixed it while working on Mac, but also solves problem on Windows ??
+
+            UpdateInfo updateData = await CheckForUpdates(false /* WAS TRUE */, ignoreSkippedVersions); // handles UpdateStatus.UpdateAvailable (in terms of UI)
             if (CheckingForUpdatesWindow != null) // if null, user closed 'Checking for Updates...' window or the UIFactory was null
             {
                 CheckingForUpdatesWindow?.Close();
