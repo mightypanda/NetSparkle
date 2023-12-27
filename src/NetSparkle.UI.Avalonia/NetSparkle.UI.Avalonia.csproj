@@ -17,6 +17,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>See https://github.com/NetSparkleUpdater/NetSparkle for all information and to file issues/pull requests for and ask questions about this project.</PackageReleaseNotes>
     <RootNamespace>NetSparkleUpdater.UI.Avalonia</RootNamespace>
+    <Configurations>Debug;Release;Beta Release</Configurations>
   </PropertyGroup>
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
@@ -32,11 +33,19 @@
     <DocumentationFile>..\bin\Debug\NetSparkle.UI.Avalonia\NetSparkle.UI.Avalonia.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Beta Release|AnyCPU'">
+    <DocumentationFile>..\bin\Debug\NetSparkle.UI.Avalonia\NetSparkle.UI.Avalonia.xml</DocumentationFile>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5|AnyCPU'">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net5|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Beta Release|net5|AnyCPU'">
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
 
@@ -48,12 +57,20 @@
 		<DefineConstants>TRACE</DefineConstants>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Beta Release|net6|AnyCPU'">
+	  <DefineConstants>TRACE</DefineConstants>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7|AnyCPU'">
 		<DefineConstants>DEBUG;TRACE</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7|AnyCPU'">
 		<DefineConstants>TRACE</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Beta Release|net7|AnyCPU'">
+	  <DefineConstants>TRACE</DefineConstants>
 	</PropertyGroup>
 
   <ItemGroup>

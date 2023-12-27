@@ -20,12 +20,18 @@
     <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
     <RootNamespace>NetSparkleUpdater</RootNamespace>
     <PackageReleaseNotes>See https://github.com/NetSparkleUpdater/NetSparkle/releases for all release information and to file issues/pull requests for this project.</PackageReleaseNotes>
+    <Configurations>Debug;Release;Beta Release</Configurations>
   </PropertyGroup>
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net452|AnyCPU'">
+    <OutputPath>..\bin\Release\NetSparkle\</OutputPath>
+    <DocumentationFile>..\bin\Release\NetSparkle\NetSparkle.xml</DocumentationFile>
+    <DefineConstants>TRACE;NET452;NETFULL;NETFRAMEWORK</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Beta Release|net452|AnyCPU'">
     <OutputPath>..\bin\Release\NetSparkle\</OutputPath>
     <DocumentationFile>..\bin\Release\NetSparkle\NetSparkle.xml</DocumentationFile>
     <DefineConstants>TRACE;NET452;NETFULL;NETFRAMEWORK</DefineConstants>
@@ -40,12 +46,22 @@
 		<DocumentationFile>..\bin\Release\NetSparkle\NetSparkle.xml</DocumentationFile>
 		<DefineConstants>TRACE;NETCORE;NETFULL;NET31</DefineConstants>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Beta Release|netcoreapp3.1|AnyCPU'">
+	  <OutputPath>..\bin\Release\NetSparkle\</OutputPath>
+	  <DocumentationFile>..\bin\Release\NetSparkle\NetSparkle.xml</DocumentationFile>
+	  <DefineConstants>TRACE;NETCORE;NETFULL;NET31</DefineConstants>
+	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
 		<OutputPath>..\bin\Debug\NetSparkle\</OutputPath>
 		<DocumentationFile>..\bin\Debug\NetSparkle\NetSparkle.xml</DocumentationFile>
 		<DefineConstants>DEBUG;TRACE;NETCORE;NETFULL;NET31</DefineConstants>
 	</PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <OutputPath>..\bin\Release\NetSparkle\</OutputPath>
+    <DocumentationFile>..\bin\Release\NetSparkle\NetSparkle.xml</DocumentationFile>
+    <DefineConstants>TRACE;NETCORE;NETSTANDARD</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Beta Release|netstandard2.0|AnyCPU'">
     <OutputPath>..\bin\Release\NetSparkle\</OutputPath>
     <DocumentationFile>..\bin\Release\NetSparkle\NetSparkle.xml</DocumentationFile>
     <DefineConstants>TRACE;NETCORE;NETSTANDARD</DefineConstants>
@@ -60,6 +76,11 @@
 		<DocumentationFile>..\bin\Release\NetSparkle\NetSparkle.xml</DocumentationFile>
 		<DefineConstants>TRACE;NETCORE;NET5</DefineConstants>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Beta Release|net5|AnyCPU'">
+	  <OutputPath>..\bin\Release\NetSparkle\</OutputPath>
+	  <DocumentationFile>..\bin\Release\NetSparkle\NetSparkle.xml</DocumentationFile>
+	  <DefineConstants>TRACE;NETCORE;NET5</DefineConstants>
+	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5|AnyCPU'">
 		<OutputPath>..\bin\Debug\NetSparkle\</OutputPath>
 		<DocumentationFile>..\bin\Debug\NetSparkle\NetSparkle.xml</DocumentationFile>
@@ -70,6 +91,11 @@
 		<DocumentationFile>..\bin\Release\NetSparkle\NetSparkle.xml</DocumentationFile>
 		<DefineConstants>TRACE;NETCORE;NET6</DefineConstants>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Beta Release|net6|AnyCPU'">
+	  <OutputPath>..\bin\Release\NetSparkle\</OutputPath>
+	  <DocumentationFile>..\bin\Release\NetSparkle\NetSparkle.xml</DocumentationFile>
+	  <DefineConstants>TRACE;NETCORE;NET6</DefineConstants>
+	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6|AnyCPU'">
 		<OutputPath>..\bin\Debug\NetSparkle\</OutputPath>
 		<DocumentationFile>..\bin\Debug\NetSparkle\NetSparkle.xml</DocumentationFile>
@@ -79,6 +105,11 @@
 		<OutputPath>..\bin\Release\NetSparkle\</OutputPath>
 		<DocumentationFile>..\bin\Release\NetSparkle\NetSparkle.xml</DocumentationFile>
 		<DefineConstants>TRACE;NETCORE;NET7</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Beta Release|net7.0|AnyCPU'">
+	  <OutputPath>..\bin\Release\NetSparkle\</OutputPath>
+	  <DocumentationFile>..\bin\Release\NetSparkle\NetSparkle.xml</DocumentationFile>
+	  <DefineConstants>TRACE;NETCORE;NET7</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0|AnyCPU'">
 		<OutputPath>..\bin\Debug\NetSparkle\</OutputPath>
