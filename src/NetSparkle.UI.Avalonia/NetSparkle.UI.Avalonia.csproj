@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net7.0;net6.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net7.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>NetSparkleUpdater.UI.Avalonia</PackageId>
     <Version>3.0.0-preview20240219001</Version>
@@ -17,6 +17,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>See https://github.com/NetSparkleUpdater/NetSparkle for all information and to file issues/pull requests for and ask questions about this project.</PackageReleaseNotes>
     <RootNamespace>NetSparkleUpdater.UI.Avalonia</RootNamespace>
+	  <Configurations>Debug;Release;Beta Release</Configurations>
   </PropertyGroup>
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
@@ -68,15 +69,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.0.9" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.0.9" />
-    <PackageReference Include="Avalonia.HtmlRenderer" Version="11.0.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' == 'Debug'">
-    <PackageReference Include="Avalonia.Diagnostics" Version="11.0.9" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.0.10" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\_AVALONIA\Avalonia.HtmlRenderer\Source\Avalonia.HtmlRenderer\Avalonia.HtmlRenderer.csproj" />
     <ProjectReference Include="..\NetSparkle\NetSparkle.csproj" />
   </ItemGroup>
 </Project>

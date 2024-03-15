@@ -13,7 +13,8 @@ namespace NetSparkleUpdater.Configurations
     /// Abstract class to handle update intervals and know which is the currently installed version
     /// of the software.
     /// </summary>
-    public abstract class Configuration
+    // PANDA: made the class NOT abstract
+    public class Configuration
     {
         /// <summary>
         /// The application name
@@ -57,7 +58,7 @@ namespace NetSparkleUpdater.Configurations
         /// (or some other application)
         /// </summary>
         public IAssemblyAccessor AssemblyAccessor { get; protected set; }
-        
+
         /// <summary>
         /// Constructor for Configuration -- should load all pertinent values by the end of the constructor!
         /// If any exception is thrown during construction of this object (e.g. from the assembly accessors),
@@ -70,17 +71,21 @@ namespace NetSparkleUpdater.Configurations
             // set default values
             InitWithDefaultValues();
 
-            try
+            if (assemblyAccessor != null)
             {
-                // set some value from the binary
-                AssemblyAccessor = assemblyAccessor;
-                ApplicationName = assemblyAccessor.AssemblyProduct;
-                InstalledVersion = assemblyAccessor.AssemblyVersion;
+                try
+                {
+                    // set some value from the binary
+                    AssemblyAccessor = assemblyAccessor;
+                    ApplicationName = assemblyAccessor.AssemblyProduct;
+                    InstalledVersion = assemblyAccessor.AssemblyVersion;
+                }
+                catch
+                {
+                    CheckForUpdate = false;
+                }
             }
-            catch
-            {
-                CheckForUpdate = false;
-            }
+
 
         }
 
@@ -114,19 +119,24 @@ namespace NetSparkleUpdater.Configurations
         /// <summary>
         /// Reloads the configuration object from disk/memory/etc.
         /// </summary>
-        public abstract void Reload();
+        //PANDA: was abstract
+        public virtual void Reload() { }
 
         /// <summary>
         /// Set the configuration values to their default values (should check for update,
         /// last check time was in the past, no version skipped, and have never run the
         /// software).
         /// </summary>
-        protected void InitWithDefaultValues()
+        // PANDA: made public
+        public void InitWithDefaultValues()
         {
             CheckForUpdate = true;
             LastCheckTime = new DateTime(0);
             LastVersionSkipped = string.Empty;
             DidRunOnce = false;
-        }
+
+            // PANDA: so it reports all updates
+			InstalledVersion = new Version(0, 0, 0, 0).ToString();
+		}
     }
 }

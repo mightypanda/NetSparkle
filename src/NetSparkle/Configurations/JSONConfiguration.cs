@@ -1,11 +1,16 @@
 ﻿using NetSparkleUpdater.AssemblyAccessors;
 using NetSparkleUpdater.Interfaces;
+#if NETFRAMEWORK
+using Newtonsoft.Json;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
+#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7)
 using System.Text.Json;
+#endif
 
 namespace NetSparkleUpdater.Configurations
 {
@@ -43,7 +48,11 @@ namespace NetSparkleUpdater.Configurations
         public JSONConfiguration(IAssemblyAccessor assemblyAccessor, string savePath)
             : base(assemblyAccessor)
         {
-            _savePath = savePath != null && !string.IsNullOrWhiteSpace(savePath) ? savePath : GetSavePath();
+            // PANDA:
+            if (assemblyAccessor == null)
+                return;
+
+            _savePath = savePath != null && string.IsNullOrWhiteSpace(savePath) ? savePath : GetSavePath();
             try
             {
                 // get the save path
@@ -105,10 +114,10 @@ namespace NetSparkleUpdater.Configurations
             else
             {
 
-                if (string.IsNullOrEmpty(AssemblyAccessor?.AssemblyCompany) || string.IsNullOrEmpty(AssemblyAccessor?.AssemblyProduct))
+                if (string.IsNullOrEmpty(AssemblyAccessor.AssemblyCompany) || string.IsNullOrEmpty(AssemblyAccessor.AssemblyProduct))
                 {
                     throw new NetSparkleException("Error: NetSparkleUpdater is missing the company or product name tag in the assembly accessor ("
-                        + (AssemblyAccessor?.GetType().ToString() ?? "[null]") + ")");
+                        + AssemblyAccessor.GetType() + ")");
                 }
                 var applicationFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData, Environment.SpecialFolderOption.DoNotVerify);
                 var saveFolder = Path.Combine(applicationFolder, AssemblyAccessor.AssemblyCompany, AssemblyAccessor.AssemblyProduct, "NetSparkleUpdater");
@@ -133,7 +142,11 @@ namespace NetSparkleUpdater.Configurations
                 try
                 {
                     string json = File.ReadAllText(saveLocation);
+#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7)
                     var data = JsonSerializer.Deserialize<SavedConfigurationData>(json);
+#else
+                    var data = JsonConvert.DeserializeObject<SavedConfigurationData>(json);
+#endif
                     CheckForUpdate = true;
                     LastCheckTime = data.LastCheckTime;
                     LastVersionSkipped = data.LastVersionSkipped;
@@ -192,7 +205,11 @@ namespace NetSparkleUpdater.Configurations
             };
             LastConfigUpdate = savedConfig.LastConfigUpdate;
 
+#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7)
             string json = JsonSerializer.Serialize(savedConfig);
+#else
+            string json = JsonConvert.SerializeObject(savedConfig);
+#endif
             try
             {
                 File.WriteAllText(savePath, json);

@@ -245,6 +245,8 @@ namespace NetSparkleUpdater
         /// </summary>
         private ICheckingForUpdates CheckingForUpdatesWindow { get; set; }
 
+        public bool IgnoreCurrentAssemblyConfiguration { get; set; } = false;
+
         /// <summary>
         /// The configuration object for a given assembly that has information on when
         /// updates were checked last, any updates that have been skipped, etc.
@@ -255,20 +257,31 @@ namespace NetSparkleUpdater
             {
                 if (_configuration == null)
                 {
-#if (NETSTANDARD || NET6 || NET7 || NET8)
-                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    // PANDA: added IgnoreCurrentAssemblyConfiguration
+                    if (IgnoreCurrentAssemblyConfiguration)
                     {
-                        _configuration = new RegistryConfiguration(new AssemblyReflectionAccessor(_appReferenceAssembly));
+                        // PANDA: it was an abstract class
+                        _configuration = new Configuration(null);
                     }
                     else
                     {
-                        _configuration = new JSONConfiguration(new AssemblyReflectionAccessor(_appReferenceAssembly));
-                    }
+
+#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7)
+                        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                        {
+                            _configuration = new RegistryConfiguration(new AssemblyReflectionAccessor(_appReferenceAssembly));
+                        }
+                        else
+                        {
+                            _configuration = new JSONConfiguration(new AssemblyReflectionAccessor(_appReferenceAssembly));
+                        }
 #else
                     _configuration = new RegistryConfiguration(new AssemblyReflectionAccessor(_appReferenceAssembly));
 #endif
+                    }
                 }
-                return _configuration;
+
+				return _configuration;
             }
             set { _configuration = value; }
         }
@@ -1736,6 +1749,8 @@ namespace NetSparkleUpdater
         /// </summary>
         public async Task<UpdateInfo> CheckForUpdatesAtUserRequest(bool ignoreSkippedVersions = false)
         {
+            // PANDA: suppressed
+            /*
             if (CheckingForUpdatesWindow == null)
             {
                 CheckingForUpdatesWindow = UIFactory?.ShowCheckingForUpdates(this);
@@ -1745,10 +1760,14 @@ namespace NetSparkleUpdater
                 }
             }
             CheckingForUpdatesWindow?.Show();
+            */
             // artificial delay -- if internet is super fast and the update check is super fast, the flash (fast show/hide) of the
             // 'Checking for Updates...' window is very disorienting, so we add an artificial delay
-            await Task.Delay(250);
-            UpdateInfo updateData = await CheckForUpdates(true, ignoreSkippedVersions); // handles UpdateStatus.UpdateAvailable (in terms of UI)
+            //await Task.Delay(250);
+
+            // NOTE: 18/07/2023 for some reason the first parameter was true, wrong! fixed it while working on Mac, but also solves problem on Windows ??
+
+            UpdateInfo updateData = await CheckForUpdates(false /* WAS TRUE */, ignoreSkippedVersions); // handles UpdateStatus.UpdateAvailable (in terms of UI)
             if (CheckingForUpdatesWindow != null) // if null, user closed 'Checking for Updates...' window or the UIFactory was null
             {
                 CheckingForUpdatesWindow?.Close();
