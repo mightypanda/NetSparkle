@@ -89,15 +89,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.0.0-preview7" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview7" />
+    <PackageReference Include="Avalonia" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' == 'Debug'">
-    <PackageReference Include="Avalonia.Diagnostics" Version="11.0.0-preview7" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.0.10" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\_AVALONIA\Avalonia.HtmlRenderer\Avalonia.HtmlRenderer\Avalonia.HtmlRenderer.csproj" />
+    <ProjectReference Include="..\..\..\..\_AVALONIA\Avalonia.HtmlRenderer\Source\Avalonia.HtmlRenderer\Avalonia.HtmlRenderer.csproj" />
     <ProjectReference Include="..\NetSparkle\NetSparkle.csproj" />
   </ItemGroup>
 </Project>
