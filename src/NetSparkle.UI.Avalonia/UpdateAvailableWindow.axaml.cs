@@ -29,13 +29,21 @@ namespace NetSparkleUpdater.UI.Avalonia
         private HtmlLabel _htmlLabel;
         private bool _wasResponseSent = false;
 
-        /// <summary>
-        /// Initialize the available update window with no initial date context
-        /// (and thus no initial information on downloadable releases to show
-        /// to the user)
-        /// </summary>
-        public UpdateAvailableWindow() : base(true)
+        #region Tabula
+
+        public static UpdateAvailableWindow Instance;
+
+		#endregion
+
+		/// <summary>
+		/// Initialize the available update window with no initial date context
+		/// (and thus no initial information on downloadable releases to show
+		/// to the user)
+		/// </summary>
+		public UpdateAvailableWindow() : base(true)
         {
+            Instance = this;
+
             this.InitializeComponent();
             InitViews();
         }
@@ -50,7 +58,9 @@ namespace NetSparkleUpdater.UI.Avalonia
         /// <param name="iconBitmap">Bitmap to use for the app's logo/graphic</param>
         public UpdateAvailableWindow(UpdateAvailableWindowViewModel viewModel, Bitmap iconBitmap) : base(true)
         {
-            this.InitializeComponent();
+			Instance = this;
+
+			this.InitializeComponent();
             InitViews();
             var imageControl = this.FindControl<Image>("AppIcon");
             if (imageControl != null)
@@ -90,6 +100,7 @@ namespace NetSparkleUpdater.UI.Avalonia
 
         private void UpdateAvailableWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            Instance = null;
             UserRespondedToUpdateCheck(UpdateAvailableResult.None); // just in case
             Closing -= UpdateAvailableWindow_Closing;
         }
