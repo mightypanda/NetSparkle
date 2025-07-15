@@ -19,7 +19,7 @@ using NetSparkleUpdater.AppCastHandlers;
 using NetSparkleUpdater.AssemblyAccessors;
 using System.Text;
 using System.Globalization;
-#if (NETSTANDARD || NET6 || NET7 || NET8)
+#if (NETSTANDARD || NET6 || NET7 || NET8 || NET9)
 using System.Runtime.InteropServices;
 #endif
 
