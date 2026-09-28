@@ -19,7 +19,7 @@ using NetSparkleUpdater.AppCastHandlers;
 using NetSparkleUpdater.AssemblyAccessors;
 using System.Text;
 using System.Globalization;
-#if (NETSTANDARD || NET6 || NET7 || NET8 || NET9)
+#if (NETSTANDARD || NET6 || NET7 || NET8 || NET9 || NET10)
 using System.Runtime.InteropServices;
 #endif
 
@@ -266,7 +266,7 @@ namespace NetSparkleUpdater
                     else
                     {
 
-#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7)
+#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7 || NET8 || NET9 || NET10)
                         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                         {
                             _configuration = new RegistryConfiguration(new AssemblyReflectionAccessor(_appReferenceAssembly));

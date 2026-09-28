@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7 || NET8 || NET9)
+#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7 || NET8 || NET9 || NET10)
 using System.Text.Json;
 #endif
 
@@ -143,7 +143,7 @@ namespace NetSparkleUpdater.Configurations
                 try
                 {
                     string json = File.ReadAllText(saveLocation);
-#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7 || NET8 || NET9)
+#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7 || NET8 || NET9 || NET10)
                     var data = JsonSerializer.Deserialize<SavedConfigurationData>(json);
 #else
                     var data = JsonConvert.DeserializeObject<SavedConfigurationData>(json);
@@ -206,10 +206,10 @@ namespace NetSparkleUpdater.Configurations
             };
             LastConfigUpdate = savedConfig.LastConfigUpdate;
 
-#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7 || NET8 || NET9)
+#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7 || NET8 || NET9 || NET10)
             string json = JsonSerializer.Serialize(savedConfig);
 #else
-            string json = JsonConvert.SerializeObject(savedConfig);
+			string json = JsonConvert.SerializeObject(savedConfig);
 #endif
             try
             {

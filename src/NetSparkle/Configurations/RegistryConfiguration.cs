@@ -3,7 +3,7 @@ using System.Globalization;
 using Microsoft.Win32;
 using NetSparkleUpdater.AssemblyAccessors;
 using NetSparkleUpdater.Interfaces;
-#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7)
+#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7 || NET8 || NET9 || NET10)
 using System.Runtime.InteropServices;
 #endif
 
@@ -144,7 +144,7 @@ namespace NetSparkleUpdater.Configurations
         /// <returns><c>true</c> if the items were loaded successfully; false otherwise</returns>
         private bool LoadValuesFromPath(string regPath)
         {
-#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7)
+#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7 || NET8 || NET9 || NET10)
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 return false;
@@ -216,7 +216,7 @@ namespace NetSparkleUpdater.Configurations
         /// <returns><c>true</c> if the values were saved to the registry; false otherwise</returns>
         private bool SaveValuesToPath(string regPath)
         {
-#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7)
+#if (NETSTANDARD || NET31 || NET5 || NET6 || NET7 || NET8 || NET9 || NET10)
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 return false;

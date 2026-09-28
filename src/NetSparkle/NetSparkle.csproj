@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net9.0</TargetFrameworks>
+    <TargetFrameworks>net10.0</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>NetSparkleUpdater.SparkleUpdater</PackageId>
     <Version>3.0.0-preview20240120001</Version>
@@ -84,6 +84,9 @@
 		<OutputPath>..\bin\Debug\NetSparkle\</OutputPath>
 		<DocumentationFile>..\bin\Debug\NetSparkle\NetSparkle.xml</DocumentationFile>
 		<DefineConstants>DEBUG;TRACE;NETCORE;NET9</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net10.0'">
+		<DefineConstants>$(DefineConstants);NETCORE;NET10</DefineConstants>
 	</PropertyGroup>
   <!-- .NET 4.5.2 references, compilation flags and build options -->
   <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
